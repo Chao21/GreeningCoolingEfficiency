@@ -290,7 +290,7 @@ Zhang, C., et al. Biophysical cooling benefit of Earth greening halved by declin
 ## Contact
 
 For code-related questions, please open an issue in this repository or contact
-[Chao Zhang](https://github.com/Chao21).
+[Chao Zhang](chaoz.geo@gmail.com).
 
 <!--
 Before public archival release:
