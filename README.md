@@ -124,7 +124,7 @@ S_{\mathrm{nonrad}} =
 ```
 
 The nonradiative workflow supports alternative ground-heat-flux treatments,
-including no ground heat flux, FLDAS, Moran, Kustas–Daughtry, and FAO-56.
+including no ground heat flux, FLDAS, and FAO-56.
 
 ### Statistical attribution
 
