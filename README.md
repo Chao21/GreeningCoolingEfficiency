@@ -85,7 +85,7 @@ valid pairwise slopes:
 
 ```math
 S = \frac{\partial \mathrm{LST}}{\partial \mathrm{LAI}}
-  = \operatorname{median}_i
+  = \mathrm{median}_i
     \left(\frac{\Delta \mathrm{LST}_i}{\Delta \mathrm{LAI}_i}\right).
 ```
 
@@ -192,6 +192,7 @@ paths in the scripts.
 | MOD16A2GF.061 | Latent heat flux robustness analysis | [NASA LP DAAC](https://doi.org/10.5067/MODIS/MOD16A2GF.061) |
 | MCD12C1.006 | Land cover and land-cover fractions | [NASA LP DAAC](https://doi.org/10.5067/MODIS/MCD12C1.006) |
 | ERA5-Land | Climate and radiation variables | [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land-monthly-means) |
+| TerraClimate | Incoming shortwave radiation | [Climatology Lab](https://www.climatologylab.org/terraclimate.html) |
 | NOAA atmospheric CO₂ | Attribution predictor | [NOAA GML](https://gml.noaa.gov/ccgg/trends/data.html) |
 | SRTM DEM | Elevation constraint and pressure estimation | [NASA Earthdata](https://www.earthdata.nasa.gov/data/instruments/srtm) |
 | PML-V2.2a and GLASS ET | Latent heat flux robustness analyses | GEE collection `projects/pml_evapotranspiration/PML/OUTPUT/PML_V22a` and [GLASS](https://glass.hku.hk/) |
@@ -199,11 +200,7 @@ paths in the scripts.
 All higher-frequency products must be aggregated to the selected monthly,
 seasonal, or annual scale before the sensitivity scripts are run. Inputs to a
 given calculation must share the same temporal coordinates and 0.05° grid.
-The current repository starts from these preprocessed inputs. In the albedo
-preprocessing used for the study, values outside `[0, 1]` were masked and
-remaining September–February gaps north of 55°N were filled first with the
-same-year March–May mean and then, where necessary, with the multi-year spring
-climatology.
+The current repository starts from these preprocessed inputs.
 
 ## Software environment
 
@@ -293,7 +290,7 @@ Zhang, C., et al. Biophysical cooling benefit of Earth greening halved by declin
 ## Contact
 
 For code-related questions, please open an issue in this repository or contact
-[Chao Zhang](chaoz.geo@gmail.com).
+[Chao Zhang](https://github.com/Chao21).
 
 <!--
 Before public archival release:
