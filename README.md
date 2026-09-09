@@ -1,6 +1,6 @@
 # Greening Cooling Efficiency
 
-Code supporting the manuscript **“Biophysical cooling benefit of Earth greening halved by declining efficiency under rising atmospheric carbon dioxide”**.
+Code supporting the manuscript **“Satellites reveal biophysical cooling capacity of Earth greening halved by declining efficiency”**.
 
 This repository contains the core processing and plotting workflows used to
 quantify changes in vegetation cooling efficiency during 2001–2024. Cooling
@@ -284,7 +284,7 @@ If you use this code, please cite the associated paper. Complete bibliographic
 information will be added here after publication.
 
 ```text
-Zhang, C., et al. Biophysical cooling benefit of Earth greening halved by declining efficiency under rising atmospheric carbon dioxide. [Journal, volume, pages, DOI to be added].
+Zhang, C., et al. Satellites reveal biophysical cooling capacity of Earth greening halved by declining efficiency. [Journal, volume, pages, DOI to be added].
 ```
 
 ## Contact
