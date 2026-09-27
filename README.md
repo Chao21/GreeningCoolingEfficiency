@@ -1,11 +1,12 @@
 # Greening Cooling Efficiency
 
-Code supporting the manuscript **“Satellites reveal biophysical cooling capacity of Earth greening halved by declining efficiency”**.
+Code supporting the manuscript **“Observed efficiency decline offsets half the surface cooling expected from Earth greening”**.
 
-This repository contains the core processing and plotting workflows used to
-quantify changes in vegetation cooling efficiency during 2001–2024. Cooling
-efficiency is represented by the sensitivity of land surface temperature
-(LST) to leaf area index (LAI), `∂LST/∂LAI`.
+This repository contains the core processing and plotting workflows, selected
+processed source data, and final figures used to quantify changes in vegetation
+cooling efficiency during 2001–2024. Cooling efficiency is represented by the
+sensitivity of land surface temperature (LST) to leaf area index (LAI),
+`∂LST/∂LAI`.
 
 > **Publication status:** The manuscript is under review. The final citation,
 > DOI, data archive, and software license will be added upon publication.
@@ -38,12 +39,24 @@ GreeningCoolingEfficiency/
 │   ├── 4_Ridge_regression.py
 │   ├── 5_Decompose_delta_LST.py
 │   └── 6_PLS_SEM_pixel.R
-└── 2.Plotting/
-    ├── Figure.01.py
-    ├── Figure.02.py
-    ├── Figure.03.py
-    ├── Figure.04.py
-    └── Figure.05.py
+├── 2.Plotting/
+│   ├── Figure.01.py
+│   ├── Figure.02.py
+│   ├── Figure.03.py
+│   ├── Figure.04.py
+│   └── Figure.05.py
+├── 3.Data/
+│   ├── Sens_trend_Annual_LSTdailymean_LAI_GLASS_1d.nc
+│   ├── Sensitivity_Annual_LSTdailymean_LAI_GLASS_1d.nc
+│   ├── Sensitivity_Annual_LSTdailymean_LAI_GLASS_regionAgg.csv
+│   ├── dLSTdailymean_GLASS_Annual_2001_2024_Decomp_1deg_consistent_mask.nc
+│   └── dLSTdailymean_GLASS_Annual_2001_2024_Global_TS.csv
+└── 4.Figure/
+    ├── Fig.01_PixelTrend_Annual.svg
+    ├── Fig.02_PixelTrend_Map.svg
+    ├── Fig.03_Decomposition_Energy.svg
+    ├── Fig.04_Attribution_Global.svg
+    └── Fig.05_dLST_Decomposition.svg
 ```
 
 ### Processing scripts
@@ -66,6 +79,34 @@ GreeningCoolingEfficiency/
 | [`Figure.03.py`](2.Plotting/Figure.03.py) | Temporal and spatial changes in radiative and nonradiative sensitivity components. |
 | [`Figure.04.py`](2.Plotting/Figure.04.py) | Ridge-regression attribution and PLS-SEM pathways. |
 | [`Figure.05.py`](2.Plotting/Figure.05.py) | Greening-induced LST changes and their LAI-driven and efficiency-driven components. |
+
+### Source data
+
+The [`3.Data`](3.Data) directory contains selected processed data underlying
+the principal results and figures. These compact files are provided for result
+inspection and reuse; they are not substitutes for the full raw inputs needed
+to rerun the complete processing workflow.
+
+| File | Contents |
+|---|---|
+| [`Sens_trend_Annual_LSTdailymean_LAI_GLASS_1d.nc`](3.Data/Sens_trend_Annual_LSTdailymean_LAI_GLASS_1d.nc) | Global 1° trend in annual daily-mean LST sensitivity to GLASS LAI. |
+| [`Sensitivity_Annual_LSTdailymean_LAI_GLASS_1d.nc`](3.Data/Sensitivity_Annual_LSTdailymean_LAI_GLASS_1d.nc) | Annual 1° gridded daily-mean LST sensitivity to GLASS LAI. |
+| [`Sensitivity_Annual_LSTdailymean_LAI_GLASS_regionAgg.csv`](3.Data/Sensitivity_Annual_LSTdailymean_LAI_GLASS_regionAgg.csv) | Annual regional sensitivity time series with the columns `group`, `region`, `time`, and `value`. |
+| [`dLSTdailymean_GLASS_Annual_2001_2024_Decomp_1deg_consistent_mask.nc`](3.Data/dLSTdailymean_GLASS_Annual_2001_2024_Decomp_1deg_consistent_mask.nc) | Global 1° gridded decomposition of the cumulative LAI-induced LST effect using a common valid-pixel mask. |
+| [`dLSTdailymean_GLASS_Annual_2001_2024_Global_TS.csv`](3.Data/dLSTdailymean_GLASS_Annual_2001_2024_Global_TS.csv) | Global annual time series of the LAI-driven, efficiency-driven, and total LST effects, stored by `variable`, `group`, `region`, `time`, and `value`. |
+
+### Main figures
+
+The [`4.Figure`](4.Figure) directory provides the five manuscript figures in
+editable, resolution-independent SVG format.
+
+| Figure | File |
+|---|---|
+| Figure 1 | [`Fig.01_PixelTrend_Annual.svg`](4.Figure/Fig.01_PixelTrend_Annual.svg) |
+| Figure 2 | [`Fig.02_PixelTrend_Map.svg`](4.Figure/Fig.02_PixelTrend_Map.svg) |
+| Figure 3 | [`Fig.03_Decomposition_Energy.svg`](4.Figure/Fig.03_Decomposition_Energy.svg) |
+| Figure 4 | [`Fig.04_Attribution_Global.svg`](4.Figure/Fig.04_Attribution_Global.svg) |
+| Figure 5 | [`Fig.05_dLST_Decomposition.svg`](4.Figure/Fig.05_dLST_Decomposition.svg) |
 
 ## Methods summary
 
@@ -176,11 +217,12 @@ The cumulative total, LAI-driven, and sensitivity-driven effects are
 For seasonal analyses, Southern Hemisphere seasons are shifted by six months
 to align phenological phases with Northern Hemisphere seasons.
 
-## Input data
+## External input data
 
-The large input datasets are not distributed in this repository. Users must
-download and preprocess them according to the manuscript and configure the
-paths in the scripts.
+The raw satellite and reanalysis datasets are not distributed in this
+repository. The files in `3.Data/` are selected derived source data. To rerun
+the complete workflow, users must download and preprocess the external inputs
+described in the manuscript and configure their paths in the scripts.
 
 | Dataset | Main use | Source |
 |---|---|---|
@@ -260,6 +302,12 @@ for n in 01 02 03 04 05; do
 done
 ```
 
+The resulting SVG files correspond to those supplied in `4.Figure/`. The
+selected derived products in `3.Data/` support inspection of the main
+sensitivity and LST-decomposition results, whereas complete reproduction of
+all panels requires the additional intermediate products referenced by each
+plotting script.
+
 Global 0.05° processing is computationally and I/O intensive. The sensitivity
 scripts use Numba and block-based multiprocessing; they should be executed as
 scripts on a machine with sufficient memory and fast storage. Increasing the
@@ -284,7 +332,7 @@ If you use this code, please cite the associated paper. Complete bibliographic
 information will be added here after publication.
 
 ```text
-Zhang, C., et al. Satellites reveal biophysical cooling capacity of Earth greening halved by declining efficiency. [Journal, volume, pages, DOI to be added].
+Zhang, C., et al. Observed efficiency decline offsets half the surface cooling expected from Earth greening. [Journal, volume, pages, DOI to be added].
 ```
 
 ## Contact
